@@ -1,0 +1,208 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".TicketActivity">
+
+    <TextView
+        android:id="@+id/textViewTicketTo"
+        android:layout_width="150dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="175dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="11dp"
+        android:gravity="center"
+        android:text="To"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/textView13"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageViewQR" />
+
+    <TextView
+        android:id="@+id/textViewTicketFrom"
+        android:layout_width="150dp"
+        android:layout_height="50dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="175dp"
+        android:layout_marginBottom="11dp"
+        android:gravity="center"
+        android:text="From"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/textView11"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageViewQR" />
+
+    <ImageView
+        android:id="@+id/imageViewArrow2"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_marginStart="15dp"
+        android:layout_marginTop="175dp"
+        android:layout_marginEnd="15dp"
+        app:layout_constraintEnd_toStartOf="@+id/textViewTicketTo"
+        app:layout_constraintStart_toEndOf="@+id/textViewTicketFrom"
+        app:layout_constraintTop_toBottomOf="@+id/imageViewQR"
+        app:srcCompat="@drawable/trending_flat_24px" />
+
+    <TextView
+        android:id="@+id/textViewTicketBreak"
+        android:layout_width="40dp"
+        android:layout_height="50dp"
+        android:layout_marginEnd="9dp"
+        android:gravity="center"
+        android:text="Break"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toStartOf="@+id/textViewTicketCarModel"
+        app:layout_constraintTop_toBottomOf="@+id/textView14" />
+
+    <TextView
+        android:id="@+id/textView11"
+        android:layout_width="75dp"
+        android:layout_height="20dp"
+        android:layout_marginTop="11dp"
+        android:layout_marginEnd="11dp"
+        android:gravity="center"
+        android:text="Time"
+        app:layout_constraintEnd_toStartOf="@+id/textView10"
+        app:layout_constraintTop_toBottomOf="@+id/textViewTicketFrom" />
+
+    <TextView
+        android:id="@+id/textViewTicketDate"
+        android:layout_width="100dp"
+        android:layout_height="50dp"
+        android:layout_marginEnd="9dp"
+        android:gravity="center"
+        android:text="Date"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toStartOf="@+id/textViewTicketTime"
+        app:layout_constraintTop_toBottomOf="@+id/textView12" />
+
+    <TextView
+        android:id="@+id/textView12"
+        android:layout_width="100dp"
+        android:layout_height="20dp"
+        android:layout_marginTop="11dp"
+        android:layout_marginEnd="9dp"
+        android:gravity="center"
+        android:text="Date"
+        app:layout_constraintEnd_toStartOf="@+id/textView11"
+        app:layout_constraintTop_toBottomOf="@+id/textViewTicketFrom" />
+
+    <TextView
+        android:id="@+id/textViewTicketTime"
+        android:layout_width="75dp"
+        android:layout_height="50dp"
+        android:layout_marginEnd="11dp"
+        android:gravity="center"
+        android:text="Time"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toStartOf="@+id/textViewTicketPeople"
+        app:layout_constraintTop_toBottomOf="@+id/textView11" />
+
+    <TextView
+        android:id="@+id/textView13"
+        android:layout_width="90dp"
+        android:layout_height="20dp"
+        android:layout_marginTop="11dp"
+        android:layout_marginEnd="3dp"
+        android:gravity="center"
+        android:text="Car Model"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textViewTicketTo" />
+
+    <TextView
+        android:id="@+id/textViewTicketPeople"
+        android:layout_width="60dp"
+        android:layout_height="50dp"
+        android:layout_marginEnd="10dp"
+        android:gravity="center"
+        android:text="People"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toStartOf="@+id/textViewTicketBreak"
+        app:layout_constraintTop_toBottomOf="@+id/textView10" />
+
+    <TextView
+        android:id="@+id/textViewTicketCarModel"
+        android:layout_width="90dp"
+        android:layout_height="50dp"
+        android:layout_marginEnd="3dp"
+        android:gravity="center"
+        android:text="Car Model"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView13" />
+
+    <TextView
+        android:id="@+id/textView10"
+        android:layout_width="60dp"
+        android:layout_height="20dp"
+        android:layout_marginTop="11dp"
+        android:layout_marginEnd="10dp"
+        android:gravity="center"
+        android:text="Seat"
+        app:layout_constraintEnd_toStartOf="@+id/textView14"
+        app:layout_constraintTop_toBottomOf="@+id/textViewTicketTo" />
+
+    <TextView
+        android:id="@+id/textView14"
+        android:layout_width="40dp"
+        android:layout_height="20dp"
+        android:layout_marginTop="11dp"
+        android:layout_marginEnd="9dp"
+        android:gravity="center"
+        android:text="Break"
+        app:layout_constraintEnd_toStartOf="@+id/textView13"
+        app:layout_constraintTop_toBottomOf="@+id/textViewTicketTo" />
+
+    <ImageView
+        android:id="@+id/imageViewQR"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="151dp"
+        android:layout_marginTop="76dp"
+        android:layout_marginEnd="152dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/ic_launcher_background" />
+
+    <TextView
+        android:id="@+id/textViewTicketNameSurname"
+        android:layout_width="352dp"
+        android:layout_height="52dp"
+        android:layout_marginStart="29dp"
+        android:layout_marginTop="21dp"
+        android:layout_marginEnd="30dp"
+        android:gravity="center"
+        android:text="Name Surname"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageViewQR" />
+
+    <TextView
+        android:id="@+id/textViewTicketIdNo"
+        android:layout_width="352dp"
+        android:layout_height="52dp"
+        android:layout_marginStart="29dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginEnd="30dp"
+        android:gravity="center"
+        android:text="ID No"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textViewTicketNameSurname" />
+</androidx.constraintlayout.widget.ConstraintLayout>
