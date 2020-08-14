@@ -61,7 +61,6 @@ public class MyTripsActivity extends AppCompatActivity {
         recyclerView.setAdapter(myTripsRecyclerAdapter);
 
         getMyTripsFromFirestore();
-
     }
 
     public void getMyTripsFromFirestore(){

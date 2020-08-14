@@ -26,6 +26,8 @@ import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FieldValue;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.google.firebase.firestore.QuerySnapshot;
 import com.google.firebase.firestore.SetOptions;
 
 import java.util.ArrayList;
@@ -280,40 +282,101 @@ public class CreateTripActivity extends AppCompatActivity {
         calendar.set(chosenYear,chosenMonth,chosenDay,chosenHour-3,chosenMinute,0);
         departTimestamp = new Timestamp(calendar.getTimeInMillis()/1000 , 0);
 
-        String from = fromText.getText().toString();
-        String to = toText.getText().toString();
-        Timestamp time = departTimestamp;
-        int peopleNumber = Integer.parseInt(peopleNumberText.getText().toString()); //or selectedItemPeopleNum+2
-        int breakNumber = selectedItemBreakNum;
-        String carModel = carModelText.getText().toString();
-        boolean canDrive = canDriveCheck.isChecked();
+        final String from = fromText.getText().toString();
+        final String to = toText.getText().toString();
+        final Timestamp time = departTimestamp;
+        final int peopleNumber = Integer.parseInt(peopleNumberText.getText().toString()); //or selectedItemPeopleNum+2
+        final int breakNumber = selectedItemBreakNum;
+        final String carModel = carModelText.getText().toString();
+        final boolean canDrive = canDriveCheck.isChecked();
 
-        Trip newTrip = new Trip(from,to,carModel,canDrive,peopleNumber,breakNumber,time); //create new trip from Trip class then push it to firestore
-        firebaseFirestore.collection("Trips").add(newTrip).addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
-            @Override
-            public void onSuccess(final DocumentReference documentReference) {
-                Toast.makeText(CreateTripActivity.this,"Trip is created!",Toast.LENGTH_LONG).show();
 
-                //add tripID to user trips arraylist
-                firebaseFirestore.collection("Users").document(firebaseAuth.getCurrentUser().getEmail()).get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+        firebaseFirestore.collection("Cars")
+                .whereEqualTo("model",carModel)
+                .whereEqualTo("available",true)
+                .get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                     @Override
-                    public void onSuccess(DocumentSnapshot documentSnapshot) {
-                        User user = documentSnapshot.toObject(User.class);
-                        user.addTriptoUser(documentReference.getId());
-                        firebaseFirestore.collection("Users").document(user.getEmail()).set(user,SetOptions.merge()); //update firestore data
+                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                        if (task.isSuccessful()) {
+                            Trip newTrip = new Trip(from,to,carModel,canDrive,peopleNumber,breakNumber,time); //create new trip from Trip class then push it to fireStore
+                            if(!task.getResult().isEmpty()){ //if there is available car
+
+                                //get an available car and fix fireStore data
+                                for(QueryDocumentSnapshot document : task.getResult()){
+                                    Car car = document.toObject(Car.class);
+                                    car.setAvailable(false);
+                                    newTrip.setCarID(document.getId());
+                                    firebaseFirestore.collection("Cars").document(document.getId()).set(car, SetOptions.merge()); //update car data
+                                    break;
+                                }
+
+                                //save newTrip to fireStore
+                                firebaseFirestore.collection("Trips").add(newTrip).addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
+                                    @Override
+                                    public void onSuccess(final DocumentReference documentReference) {
+                                        Toast.makeText(CreateTripActivity.this,"Trip is created!",Toast.LENGTH_LONG).show();
+
+                                        //add tripID to user trips arrayList
+                                        firebaseFirestore.collection("Users").document(firebaseAuth.getCurrentUser().getEmail()).get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+                                            @Override
+                                            public void onSuccess(DocumentSnapshot documentSnapshot) {
+                                                User user = documentSnapshot.toObject(User.class);
+                                                user.addTriptoUser(documentReference.getId());
+                                                firebaseFirestore.collection("Users").document(user.getEmail()).set(user,SetOptions.merge()); //update fireStore data
+                                            }
+                                        });
+
+                                        //intent to main activity
+                                        Intent intent = new Intent(CreateTripActivity.this,MainActivity.class);
+                                        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                                        startActivity(intent);
+                                    }
+                                }).addOnFailureListener(new OnFailureListener() {
+                                    @Override
+                                    public void onFailure(@NonNull Exception e) {
+                                        Toast.makeText(CreateTripActivity.this,e.getLocalizedMessage().toString(),Toast.LENGTH_LONG).show();
+                                    }
+                                });
+                            }
+                            else{ //if there is no available car
+                                AlertDialog.Builder builder = new AlertDialog.Builder(CreateTripActivity.this);
+                                builder.setMessage("There is no available car. Please try other car models!");
+                                builder.setNeutralButton("OK", new DialogInterface.OnClickListener() {
+                                    @Override
+                                    public void onClick(DialogInterface dialog, int which) {
+
+                                    }
+                                });
+                                AlertDialog alertDialog = builder.create();
+                                alertDialog.show();
+                            }
+                        }
+                        else {
+                            Toast.makeText(CreateTripActivity.this, task.getException().getLocalizedMessage().toString(),Toast.LENGTH_LONG).show();
+                        }
                     }
                 });
 
-                Intent intent = new Intent(CreateTripActivity.this,MainActivity.class);
-                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                startActivity(intent);
-            }
-        }).addOnFailureListener(new OnFailureListener() {
+
+    }
+
+    /*private void isThereAvailableCar(String carModel){
+        System.out.println(carModel);
+        firebaseFirestore.collection("Cars")
+                .whereEqualTo("model",carModel)
+                .whereEqualTo("available",true)
+                .get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
             @Override
-            public void onFailure(@NonNull Exception e) {
-                Toast.makeText(CreateTripActivity.this,e.getLocalizedMessage().toString(),Toast.LENGTH_LONG).show();
+            public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                if (task.isSuccessful()) {
+                    if(!task.getResult().isEmpty()){
+                        System.out.println("TRUE");
+                    }
+                } else {
+                    Toast.makeText(CreateTripActivity.this, task.getException().getLocalizedMessage().toString(),Toast.LENGTH_LONG).show();
+                }
             }
         });
 
-    }
+    }*/
 }

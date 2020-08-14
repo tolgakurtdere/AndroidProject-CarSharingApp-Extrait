@@ -6,6 +6,7 @@ import android.os.Parcelable;
 import com.google.firebase.Timestamp;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 
 public class Trip implements Parcelable {
     private String from,to,carModel;
@@ -13,6 +14,7 @@ public class Trip implements Parcelable {
     private Timestamp departTime;
 
     private boolean canDrive;
+    private String carID;
 
     public Trip(){}
 
@@ -29,10 +31,12 @@ public class Trip implements Parcelable {
         else driverNumber = 0;
     }
 
+
     protected Trip(Parcel in) {
         from = in.readString();
         to = in.readString();
         carModel = in.readString();
+        carID = in.readString();
         driverNumber = in.readInt();
         peopleNumber = in.readInt();
         fullSeatNumber = in.readInt();
@@ -125,6 +129,14 @@ public class Trip implements Parcelable {
         this.canDrive = canDrive;
     }
 
+    public String getCarID() {
+        return carID;
+    }
+
+    public void setCarID(String carID) {
+        this.carID = carID;
+    }
+
     @Override
     public int describeContents() {
         return 0;
@@ -135,6 +147,7 @@ public class Trip implements Parcelable {
         dest.writeString(from);
         dest.writeString(to);
         dest.writeString(carModel);
+        dest.writeString(carID);
         dest.writeInt(driverNumber);
         dest.writeInt(peopleNumber);
         dest.writeInt(fullSeatNumber);

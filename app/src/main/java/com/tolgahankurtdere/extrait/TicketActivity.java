@@ -2,7 +2,9 @@ package com.tolgahankurtdere.extrait;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.TextView;
 
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -10,6 +12,7 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 
+import java.util.ArrayList;
 import java.util.Calendar;
 
 public class TicketActivity extends AppCompatActivity {
@@ -24,6 +27,8 @@ public class TicketActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_ticket);
+
+        this.setTitle("Ticket"); //set activity title
 
         firebaseAuth = FirebaseAuth.getInstance();
         firebaseFirestore = FirebaseFirestore.getInstance();
@@ -76,4 +81,11 @@ public class TicketActivity extends AppCompatActivity {
         breakNumberText.setText(String.valueOf(trip.getBreakNumber()));
         carModelText.setText(trip.getCarModel());
     }
+
+    public void showCarDetailsClicked(View view){
+        Intent intent = new Intent(TicketActivity.this, CarDetailsActivity.class);
+        intent.putExtra("tripData", trip);
+        startActivity(intent);
+    }
+
 }
