@@ -8,14 +8,10 @@ import com.google.firebase.Timestamp;
 import java.util.ArrayList;
 
 public class Trip implements Parcelable {
-    private String from,to,carModel;
-    private int driverNumber,peopleNumber,fullSeatNumber = 1,breakNumber;
+    private String from,to,carModel,carID,tripID;
+    private int driverNumber,peopleNumber,fullSeatNumber = 1,breakNumber,readyUserNumber = 0;
     private Timestamp departTime;
-
-    private boolean canDrive;
-    private String carID;
-    private String tripID;
-    private int readyUserNumber = 0;
+    private boolean canDrive,isActive = false;
     private ArrayList<String> users = new ArrayList<>();
 
     public Trip(){}
@@ -38,15 +34,16 @@ public class Trip implements Parcelable {
         from = in.readString();
         to = in.readString();
         carModel = in.readString();
+        carID = in.readString();
+        tripID = in.readString();
         driverNumber = in.readInt();
         peopleNumber = in.readInt();
         fullSeatNumber = in.readInt();
         breakNumber = in.readInt();
+        readyUserNumber = in.readInt();
         departTime = in.readParcelable(Timestamp.class.getClassLoader());
         canDrive = in.readByte() != 0;
-        carID = in.readString();
-        tripID = in.readString();
-        readyUserNumber = in.readInt();
+        isActive = in.readByte() != 0;
         users = in.createStringArrayList();
     }
 
@@ -166,10 +163,17 @@ public class Trip implements Parcelable {
         this.readyUserNumber = readyUserNumber;
     }
 
+    public boolean isActive() {
+        return isActive;
+    }
+
+    public void setActive(boolean active) {
+        isActive = active;
+    }
+
     public void addUsertoTrip(String userID){
         users.add(userID);
     }
-
 
     @Override
     public int describeContents() {
@@ -181,15 +185,16 @@ public class Trip implements Parcelable {
         dest.writeString(from);
         dest.writeString(to);
         dest.writeString(carModel);
+        dest.writeString(carID);
+        dest.writeString(tripID);
         dest.writeInt(driverNumber);
         dest.writeInt(peopleNumber);
         dest.writeInt(fullSeatNumber);
         dest.writeInt(breakNumber);
+        dest.writeInt(readyUserNumber);
         dest.writeParcelable(departTime, flags);
         dest.writeByte((byte) (canDrive ? 1 : 0));
-        dest.writeString(carID);
-        dest.writeString(tripID);
-        dest.writeInt(readyUserNumber);
+        dest.writeByte((byte) (isActive ? 1 : 0));
         dest.writeStringList(users);
     }
 }

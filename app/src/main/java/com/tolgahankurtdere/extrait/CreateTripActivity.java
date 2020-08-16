@@ -294,6 +294,7 @@ public class CreateTripActivity extends AppCompatActivity {
         firebaseFirestore.collection("Cars")
                 .whereEqualTo("model",carModel)
                 .whereEqualTo("available",true)
+                .whereEqualTo("location",from)
                 .get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                     @Override
                     public void onComplete(@NonNull Task<QuerySnapshot> task) {
@@ -360,27 +361,6 @@ public class CreateTripActivity extends AppCompatActivity {
                         }
                     }
                 });
-
-
     }
 
-    /*private void isThereAvailableCar(String carModel){
-        System.out.println(carModel);
-        firebaseFirestore.collection("Cars")
-                .whereEqualTo("model",carModel)
-                .whereEqualTo("available",true)
-                .get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-            @Override
-            public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                if (task.isSuccessful()) {
-                    if(!task.getResult().isEmpty()){
-                        System.out.println("TRUE");
-                    }
-                } else {
-                    Toast.makeText(CreateTripActivity.this, task.getException().getLocalizedMessage().toString(),Toast.LENGTH_LONG).show();
-                }
-            }
-        });
-
-    }*/
 }

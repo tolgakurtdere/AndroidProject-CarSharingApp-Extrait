@@ -109,6 +109,7 @@ public class TicketActivity extends AppCompatActivity {
                             trip.setReadyUserNumber(trip.getReadyUserNumber() + 1);
 
                             if(trip.getFullSeatNumber() == trip.getReadyUserNumber() || trip.getDepartTime().toDate().compareTo(Calendar.getInstance().getTime()) < 0){ //if all users are ready or time is up
+                                trip.setActive(true); //set trip active
                                 //make users travelling now if user is enrolled this trip and ready
                                 firebaseFirestore.collection("Users")
                                         .whereArrayContains("trips",trip.getTripID())

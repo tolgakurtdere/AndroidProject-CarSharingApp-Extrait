@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.tolgahankurtdere.extrait">
-
     <!--
          The ACCESS_COARSE/FINE_LOCATION permissions are not required to use
          Google Maps Android API v2, but you must specify either coarse or fine
@@ -16,7 +15,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-
+        <activity android:name=".ProfileActivity"></activity>
         <!--
              The API key for Google Maps-based APIs is defined as a string resource.
              (See the file "res/values/google_maps_api.xml").
@@ -31,9 +30,9 @@
 
         <activity
             android:name=".CurrentLocationActivity"
-            android:label="@string/title_activity_current_location"></activity>
+            android:label="@string/title_activity_current_location" />
         <activity android:name=".CurrentTripActivity" />
-        <activity android:name=".OnlineCarDataActivity" />
+        <activity android:name=".CarDataActivity" />
         <activity android:name=".CarDetailsActivity" />
         <activity android:name=".TicketActivity" />
         <activity android:name=".MyTripsActivity" />
@@ -49,8 +48,9 @@
             </intent-filter>
         </activity>
 
-        <uses-library android:name="org.apache.http.legacy" android:required="false"></uses-library> //after android 9 pie
-
+        <uses-library
+            android:name="org.apache.http.legacy"
+            android:required="false" />
     </application>
 
 </manifest>

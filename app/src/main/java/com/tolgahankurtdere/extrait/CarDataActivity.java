@@ -2,18 +2,12 @@ package com.tolgahankurtdere.extrait;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.app.AlertDialog;
-import android.content.DialogInterface;
-import android.content.Intent;
 import android.os.Bundle;
 
-import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
-import com.google.firebase.firestore.SetOptions;
 
-public class OnlineCarDataActivity extends AppCompatActivity {
+public class CarDataActivity extends AppCompatActivity {
 
     FirebaseAuth firebaseAuth;
     FirebaseFirestore firebaseFirestore;
@@ -21,19 +15,19 @@ public class OnlineCarDataActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_online_car_data);
+        setContentView(R.layout.activity_car_data);
 
-        this.setTitle("Online Car Data"); //set activity title
+        this.setTitle("Car Data"); //set activity title
 
         firebaseAuth = FirebaseAuth.getInstance();
         firebaseFirestore = FirebaseFirestore.getInstance();
 
-        firebaseFirestore.collection("Users").document(firebaseAuth.getCurrentUser().getEmail()).get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+        /*firebaseFirestore.collection("Users").document(firebaseAuth.getCurrentUser().getEmail()).get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
             @Override
             public void onSuccess(DocumentSnapshot documentSnapshot) {
                 User user = documentSnapshot.toObject(User.class);
                 if(!user.isTravelingNow()){ //if user is not traveling now
-                    AlertDialog.Builder builder = new AlertDialog.Builder(OnlineCarDataActivity.this);
+                    AlertDialog.Builder builder = new AlertDialog.Builder(CarDataActivity.this);
                     builder.setMessage("You are not currently traveling. Please try after your trip is began!");
                     builder.setNeutralButton("OK", new DialogInterface.OnClickListener() {
                         @Override
@@ -46,14 +40,14 @@ public class OnlineCarDataActivity extends AppCompatActivity {
                     alertDialog.setOnDismissListener(new DialogInterface.OnDismissListener() {
                         @Override
                         public void onDismiss(DialogInterface dialog) {
-                            Intent intent = new Intent(OnlineCarDataActivity.this,MainActivity.class);
+                            Intent intent = new Intent(CarDataActivity.this,MainActivity.class);
                             intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                             startActivity(intent);
                         }
                     });
                 }
             }
-        });
+        });*/
 
     }
 }

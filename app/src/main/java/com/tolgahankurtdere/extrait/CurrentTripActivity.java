@@ -46,9 +46,7 @@ public class CurrentTripActivity extends AppCompatActivity {
                     alertDialog.setOnDismissListener(new DialogInterface.OnDismissListener() {
                         @Override
                         public void onDismiss(DialogInterface dialog) {
-                            Intent intent = new Intent(CurrentTripActivity.this,MainActivity.class);
-                            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                            startActivity(intent);
+                            finish();
                         }
                     });
                 }

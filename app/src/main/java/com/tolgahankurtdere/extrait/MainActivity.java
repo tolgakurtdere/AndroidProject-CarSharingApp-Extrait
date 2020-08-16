@@ -258,16 +258,16 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-        if(item.getItemId() == R.id.myTrips){
+        if(item.getItemId() == R.id.profile){
+            Intent intent = new Intent(MainActivity.this, ProfileActivity.class);
+            startActivity(intent);
+        }
+        else if(item.getItemId() == R.id.myTrips){
             Intent intent = new Intent(MainActivity.this, MyTripsActivity.class);
             startActivity(intent);
         }
         else if(item.getItemId() == R.id.currentTripData){
             Intent intent = new Intent(MainActivity.this, CurrentTripActivity.class);
-            startActivity(intent);
-        }
-        else if(item.getItemId() == R.id.onlineCarData){
-            Intent intent = new Intent(MainActivity.this, OnlineCarDataActivity.class);
             startActivity(intent);
         }
         else if(item.getItemId() == R.id.preferences){
