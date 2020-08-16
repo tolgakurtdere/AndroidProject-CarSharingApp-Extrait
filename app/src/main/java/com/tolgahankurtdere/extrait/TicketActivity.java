@@ -6,11 +6,16 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FieldValue;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.google.firebase.firestore.QuerySnapshot;
+import com.google.firebase.firestore.SetOptions;
 
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -86,6 +91,50 @@ public class TicketActivity extends AppCompatActivity {
         Intent intent = new Intent(TicketActivity.this, CarDetailsActivity.class);
         intent.putExtra("tripData", trip);
         startActivity(intent);
+    }
+    public void QRClicked(View view){
+
+        firebaseFirestore.collection("Users").document(firebaseAuth.getCurrentUser().getEmail()).get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+            @Override
+            public void onSuccess(DocumentSnapshot documentSnapshot) {
+                User user = documentSnapshot.toObject(User.class);
+                if(!user.isReady()){
+                    user.setReady(true);
+                    firebaseFirestore.collection("Users").document(firebaseAuth.getCurrentUser().getEmail()).set(user, SetOptions.merge()); //merge user data
+
+                    firebaseFirestore.collection("Trips").document(trip.getTripID()).get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+                        @Override
+                        public void onSuccess(DocumentSnapshot documentSnapshot) {
+                            Trip trip = documentSnapshot.toObject(Trip.class);
+                            trip.setReadyUserNumber(trip.getReadyUserNumber() + 1);
+
+                            if(trip.getFullSeatNumber() == trip.getReadyUserNumber() || trip.getDepartTime().toDate().compareTo(Calendar.getInstance().getTime()) < 0){ //if all users are ready or time is up
+                                //make users travelling now if user is enrolled this trip and ready
+                                firebaseFirestore.collection("Users")
+                                        .whereArrayContains("trips",trip.getTripID())
+                                        .whereEqualTo("ready",true).get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
+                                    @Override
+                                    public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
+                                        for(QueryDocumentSnapshot queryDocumentSnapshot : queryDocumentSnapshots){
+                                            User user = queryDocumentSnapshot.toObject(User.class);
+                                            user.setTravelingNow(true);
+                                            firebaseFirestore.collection("Users").document(user.getEmail()).set(user, SetOptions.merge()); //merge user data
+                                        }
+                                    }
+                                });
+                            }
+                            firebaseFirestore.collection("Trips").document(trip.getTripID()).set(trip, SetOptions.merge()); //merge trip data
+                        }
+                    });
+
+                }
+                else{
+                    Toast.makeText(TicketActivity.this,"You are already ready!",Toast.LENGTH_LONG).show();
+                }
+
+            }
+        });
+
     }
 
 }

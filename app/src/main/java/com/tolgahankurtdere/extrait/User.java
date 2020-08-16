@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 public class User {
     private String id,name,surname,email;
-    private boolean driverLicense,sleep,smoke;
+    private boolean driverLicense,sleep,smoke,isTravelingNow = false,isReady = false;
     private ArrayList<Boolean> musics, topics;
     private ArrayList<String> trips = new ArrayList<>();
 
@@ -96,6 +96,22 @@ public class User {
 
     public void setTrips(ArrayList<String> trips) {
         this.trips = trips;
+    }
+
+    public boolean isTravelingNow() {
+        return isTravelingNow;
+    }
+
+    public void setTravelingNow(boolean travelingNow) {
+        isTravelingNow = travelingNow;
+    }
+
+    public boolean isReady() {
+        return isReady;
+    }
+
+    public void setReady(boolean ready) {
+        isReady = ready;
     }
 
     public void addTriptoUser(String tripID){

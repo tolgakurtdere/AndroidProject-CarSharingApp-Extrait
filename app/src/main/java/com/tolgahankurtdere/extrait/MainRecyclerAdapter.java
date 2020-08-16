@@ -113,15 +113,16 @@ public class MainRecyclerAdapter extends RecyclerView.Adapter<MainRecyclerAdapte
             public void onSuccess(DocumentSnapshot documentSnapshot) {
                 User user = documentSnapshot.toObject(User.class);
                 user.addTriptoUser(tripIDs.get(position));
-                firebaseFirestore.collection("Users").document(user.getEmail()).set(user, SetOptions.merge()); //update firestore data
+                firebaseFirestore.collection("Users").document(user.getEmail()).set(user, SetOptions.merge()); //update fireStore data
             }
         });
         firebaseFirestore.collection("Trips").document(tripIDs.get(position)).get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
             @Override
             public void onSuccess(DocumentSnapshot documentSnapshot) {
                 Trip trip = documentSnapshot.toObject(Trip.class);
+                trip.addUsertoTrip(firebaseAuth.getCurrentUser().getEmail()); //add userID to trip user arrayList
                 trip.setFullSeatNumber(trip.getFullSeatNumber()+1);
-                firebaseFirestore.collection("Trips").document(tripIDs.get(position)).set(trip, SetOptions.merge()); //update firestore data
+                firebaseFirestore.collection("Trips").document(tripIDs.get(position)).set(trip, SetOptions.merge()); //update fireStore data
             }
         });
     }

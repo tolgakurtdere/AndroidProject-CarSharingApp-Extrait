@@ -223,7 +223,7 @@ public class MainActivity extends AppCompatActivity {
                             tripArrayList.clear(); //clear ArrayList before the getting data
                             tripIDs.clear();
                             for (QueryDocumentSnapshot doc : value) {
-                                Trip trip = doc.toObject(Trip.class); //get Trip Data from firestore as a Trip Object
+                                Trip trip = doc.toObject(Trip.class); //get Trip Data from fireStore as a Trip Object
                                 tripIDs.add(doc.getId());
                                 tripArrayList.add(trip);
 
@@ -260,6 +260,14 @@ public class MainActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         if(item.getItemId() == R.id.myTrips){
             Intent intent = new Intent(MainActivity.this, MyTripsActivity.class);
+            startActivity(intent);
+        }
+        else if(item.getItemId() == R.id.currentTripData){
+            Intent intent = new Intent(MainActivity.this, CurrentTripActivity.class);
+            startActivity(intent);
+        }
+        else if(item.getItemId() == R.id.onlineCarData){
+            Intent intent = new Intent(MainActivity.this, OnlineCarDataActivity.class);
             startActivity(intent);
         }
         else if(item.getItemId() == R.id.preferences){

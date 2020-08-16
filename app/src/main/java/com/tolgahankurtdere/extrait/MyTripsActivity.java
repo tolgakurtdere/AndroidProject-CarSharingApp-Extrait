@@ -8,6 +8,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Toast;
@@ -84,8 +85,29 @@ public class MyTripsActivity extends AppCompatActivity {
 
                             }
                             else{
-                                //System.out.println("EMPTY");
+                                //System.out.println("There is no trip on fireStore");
                             }
+                            if(tripArrayList.isEmpty()){ //if user do not have any trip
+                                AlertDialog.Builder builder = new AlertDialog.Builder(MyTripsActivity.this);
+                                builder.setMessage("You do not have any trip plan!");
+                                builder.setNeutralButton("OK", new DialogInterface.OnClickListener() {
+                                    @Override
+                                    public void onClick(DialogInterface dialog, int which) {
+
+                                    }
+                                });
+                                AlertDialog alertDialog = builder.create();
+                                alertDialog.show();
+                                alertDialog.setOnDismissListener(new DialogInterface.OnDismissListener() {
+                                    @Override
+                                    public void onDismiss(DialogInterface dialog) {
+                                        Intent intent = new Intent(MyTripsActivity.this,MainActivity.class);
+                                        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                                        startActivity(intent);
+                                    }
+                                });
+                            }
+
                         }
                     });
                 }

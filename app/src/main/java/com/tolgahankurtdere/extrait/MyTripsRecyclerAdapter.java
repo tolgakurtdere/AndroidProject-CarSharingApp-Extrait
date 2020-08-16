@@ -1,6 +1,8 @@
 package com.tolgahankurtdere.extrait;
 
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Parcelable;
 import android.view.LayoutInflater;
@@ -59,9 +61,10 @@ public class MyTripsRecyclerAdapter extends RecyclerView.Adapter<MyTripsRecycler
     private ArrayList<Trip> tripArrayList;
     private Context context;
 
-    public MyTripsRecyclerAdapter(Context context, ArrayList<Trip> tripArrayList) {
+    public MyTripsRecyclerAdapter(final Context context, ArrayList<Trip> tripArrayList) {
         this.context = context;
         this.tripArrayList = tripArrayList;
+
     }
 
     @NonNull

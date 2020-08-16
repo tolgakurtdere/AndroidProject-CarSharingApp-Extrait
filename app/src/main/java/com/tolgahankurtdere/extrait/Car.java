@@ -10,7 +10,7 @@ public class Car implements Parcelable {
     private String model, fuelType, location;
     private int year, km;
     private ArrayList<String> lastUsers;
-    boolean isAutomatic, hasLaneAssist, hasParkingGuidance, isAvailable = true;
+    private boolean isAutomatic, hasLaneAssist, hasParkingGuidance, isAvailable = true;
     Timestamp lastUsedTime;
 
     public Car() {}

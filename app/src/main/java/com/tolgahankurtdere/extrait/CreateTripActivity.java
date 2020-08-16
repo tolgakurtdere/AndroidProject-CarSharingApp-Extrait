@@ -298,7 +298,8 @@ public class CreateTripActivity extends AppCompatActivity {
                     @Override
                     public void onComplete(@NonNull Task<QuerySnapshot> task) {
                         if (task.isSuccessful()) {
-                            Trip newTrip = new Trip(from,to,carModel,canDrive,peopleNumber,breakNumber,time); //create new trip from Trip class then push it to fireStore
+                            final Trip newTrip = new Trip(from,to,carModel,canDrive,peopleNumber,breakNumber,time); //create new trip from Trip class then push it to fireStore
+                            newTrip.addUsertoTrip(firebaseAuth.getCurrentUser().getEmail()); //add userID to trip user arrayList
                             if(!task.getResult().isEmpty()){ //if there is available car
 
                                 //get an available car and fix fireStore data
@@ -315,6 +316,9 @@ public class CreateTripActivity extends AppCompatActivity {
                                     @Override
                                     public void onSuccess(final DocumentReference documentReference) {
                                         Toast.makeText(CreateTripActivity.this,"Trip is created!",Toast.LENGTH_LONG).show();
+                                        //add tripID to trip and merge
+                                        newTrip.setTripID(documentReference.getId());
+                                        documentReference.set(newTrip,SetOptions.merge());
 
                                         //add tripID to user trips arrayList
                                         firebaseFirestore.collection("Users").document(firebaseAuth.getCurrentUser().getEmail()).get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
