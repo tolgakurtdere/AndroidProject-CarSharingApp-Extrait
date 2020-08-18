@@ -130,7 +130,20 @@ public class TicketActivity extends AppCompatActivity {
 
                 }
                 else{
-                    Toast.makeText(TicketActivity.this,"You are already ready!",Toast.LENGTH_LONG).show();
+                    Toast.makeText(TicketActivity.this,"Your trip is done!",Toast.LENGTH_LONG).show();
+                    user.setReady(false);
+                    user.setTravelingNow(false);
+                    firebaseFirestore.collection("Users").document(firebaseAuth.getCurrentUser().getEmail()).set(user, SetOptions.merge()); //merge user data
+
+                    firebaseFirestore.collection("Trips").document(trip.getTripID()).get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+                        @Override
+                        public void onSuccess(DocumentSnapshot documentSnapshot) {
+                            Trip trip = documentSnapshot.toObject(Trip.class);
+                            trip.setActive(false); //set trip inactive
+                            firebaseFirestore.collection("Trips").document(trip.getTripID()).set(trip, SetOptions.merge()); //merge trip data
+                        }
+                    });
+                    //Intent intent = new Intent(TicketActivity.this,)
                 }
 
             }

@@ -1,4 +1,23 @@
 <resources>
     <string name="app_name">Extrait</string>
     <string name="title_activity_current_location">Map</string>
+    
+    <string-array name="carIDs">
+        <item>Select one</item>
+        <item>RenaultClio3.1</item>
+        <item>RenaultClio3.2</item>
+        <item>RenaultClio3.3</item>
+        <item>RenaultClio3.4</item>
+        <item>RenaultClio3.5</item>
+        <item>RenaultClio4.1</item>
+        <item>RenaultClio4.2</item>
+        <item>RenaultClio4.3</item>
+        <item>RenaultClio4.4</item>
+        <item>RenaultClio4.5</item>
+        <item>RenaultClio5.1</item>
+        <item>RenaultClio5.2</item>
+        <item>RenaultClio5.3</item>
+        <item>RenaultClio5.4</item>
+        <item>RenaultClio5.5</item>
+    </string-array>
 </resources>

@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <TextView
+        android:id="@+id/adminMainRecyclerTextViewTripID"
+        android:layout_width="350dp"
+        android:layout_height="30dp"
+        android:layout_marginStart="30dp"
+        android:layout_marginTop="3dp"
+        android:layout_marginEnd="31dp"
+        android:gravity="center"
+        android:text="Trip ID"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/adminMainRecyclerTextViewTo"
+        android:layout_width="150dp"
+        android:layout_height="50dp"
+        android:layout_marginEnd="16dp"
+        android:gravity="center"
+        android:text="To"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/adminMainRecyclerTextViewTripID" />
+
+    <TextView
+        android:id="@+id/adminMainRecyclerTextViewDate"
+        android:layout_width="100dp"
+        android:layout_height="50dp"
+        android:layout_marginStart="1dp"
+        android:gravity="center"
+        android:text="Date"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView17" />
+
+    <TextView
+        android:id="@+id/textView16"
+        android:layout_width="65dp"
+        android:layout_height="20dp"
+        android:layout_marginStart="10dp"
+        android:gravity="center"
+        android:text="Time"
+        app:layout_constraintStart_toEndOf="@+id/textView17"
+        app:layout_constraintTop_toBottomOf="@+id/adminMainRecyclerTextViewFrom" />
+
+    <TextView
+        android:id="@+id/textView18"
+        android:layout_width="130dp"
+        android:layout_height="20dp"
+        android:layout_marginStart="10dp"
+        android:gravity="center"
+        android:text="Car ID"
+        app:layout_constraintStart_toEndOf="@+id/textView16"
+        app:layout_constraintTop_toBottomOf="@+id/adminMainRecyclerTextViewTo" />
+
+    <TextView
+        android:id="@+id/adminMainRecyclerTextViewFrom"
+        android:layout_width="150dp"
+        android:layout_height="50dp"
+        android:layout_marginStart="16dp"
+        android:gravity="center"
+        android:text="From"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/adminMainRecyclerTextViewTripID" />
+
+    <TextView
+        android:id="@+id/textView17"
+        android:layout_width="100dp"
+        android:layout_height="20dp"
+        android:layout_marginStart="1dp"
+        android:gravity="center"
+        android:text="Date"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/adminMainRecyclerTextViewFrom" />
+
+    <CheckBox
+        android:id="@+id/adminMainCheckBoxActive"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="16dp"
+        android:clickable="false"
+        android:text="Active"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/adminMainRecyclerTextViewCarID"
+        app:layout_constraintTop_toBottomOf="@+id/adminMainRecyclerTextViewTo" />
+
+    <TextView
+        android:id="@+id/adminMainRecyclerTextViewCarID"
+        android:layout_width="130dp"
+        android:layout_height="50dp"
+        android:layout_marginStart="10dp"
+        android:gravity="center"
+        android:text="Car ID"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toEndOf="@+id/adminMainRecyclerTextViewTime"
+        app:layout_constraintTop_toBottomOf="@+id/textView18" />
+
+    <TextView
+        android:id="@+id/adminMainRecyclerTextViewTime"
+        android:layout_width="65dp"
+        android:layout_height="50dp"
+        android:layout_marginStart="10dp"
+        android:gravity="center"
+        android:text="Time"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toEndOf="@+id/adminMainRecyclerTextViewDate"
+        app:layout_constraintTop_toBottomOf="@+id/textView16" />
+
+    <ImageView
+        android:id="@+id/imageViewArrow3"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_marginStart="15dp"
+        android:layout_marginEnd="14dp"
+        app:layout_constraintEnd_toStartOf="@+id/adminMainRecyclerTextViewTo"
+        app:layout_constraintStart_toEndOf="@+id/adminMainRecyclerTextViewFrom"
+        app:layout_constraintTop_toBottomOf="@+id/adminMainRecyclerTextViewTripID"
+        app:srcCompat="@drawable/trending_flat_24px" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

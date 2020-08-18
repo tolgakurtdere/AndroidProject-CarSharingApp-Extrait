@@ -3,14 +3,21 @@ package com.tolgahankurtdere.extrait;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.Spinner;
+import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.FirebaseFirestore;
 
-public class CarDataActivity extends AppCompatActivity {
+public class CarDataActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
 
     FirebaseAuth firebaseAuth;
     FirebaseFirestore firebaseFirestore;
+
+    Spinner carIDSpinner;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -22,32 +29,26 @@ public class CarDataActivity extends AppCompatActivity {
         firebaseAuth = FirebaseAuth.getInstance();
         firebaseFirestore = FirebaseFirestore.getInstance();
 
-        /*firebaseFirestore.collection("Users").document(firebaseAuth.getCurrentUser().getEmail()).get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
-            @Override
-            public void onSuccess(DocumentSnapshot documentSnapshot) {
-                User user = documentSnapshot.toObject(User.class);
-                if(!user.isTravelingNow()){ //if user is not traveling now
-                    AlertDialog.Builder builder = new AlertDialog.Builder(CarDataActivity.this);
-                    builder.setMessage("You are not currently traveling. Please try after your trip is began!");
-                    builder.setNeutralButton("OK", new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialog, int which) {
 
-                        }
-                    });
-                    AlertDialog alertDialog = builder.create();
-                    alertDialog.show();
-                    alertDialog.setOnDismissListener(new DialogInterface.OnDismissListener() {
-                        @Override
-                        public void onDismiss(DialogInterface dialog) {
-                            Intent intent = new Intent(CarDataActivity.this,MainActivity.class);
-                            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                            startActivity(intent);
-                        }
-                    });
-                }
-            }
-        });*/
+        carIDSpinner = findViewById(R.id.spinnerSelectCarID);
+        ArrayAdapter<CharSequence> arrayAdapter = ArrayAdapter.createFromResource(this,R.array.carIDs,android.R.layout.simple_spinner_item);
+        arrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        carIDSpinner.setAdapter(arrayAdapter);
+        carIDSpinner.setOnItemSelectedListener(this);
+
+    }
+
+    @Override
+    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+        if(position != 0){
+            String text = parent.getItemAtPosition(position).toString();
+            Toast.makeText(parent.getContext(),text,Toast.LENGTH_LONG).show();
+        }
+
+    }
+
+    @Override
+    public void onNothingSelected(AdapterView<?> parent) {
 
     }
 }
