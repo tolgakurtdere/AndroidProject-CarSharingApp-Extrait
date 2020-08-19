@@ -2,22 +2,23 @@ package com.tolgahankurtdere.extrait;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.Dialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
+import android.widget.RatingBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentSnapshot;
-import com.google.firebase.firestore.FieldValue;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 import com.google.firebase.firestore.SetOptions;
 
-import java.util.ArrayList;
 import java.util.Calendar;
 
 public class TicketActivity extends AppCompatActivity {
@@ -27,6 +28,8 @@ public class TicketActivity extends AppCompatActivity {
 
     TextView nameSurnameText,idNoText,fromText,toText,dateText,timeText,peopleNumberText,breakNumberText,carModelText;
     Trip trip;
+
+    Dialog ratingBarPopUpDialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,6 +53,9 @@ public class TicketActivity extends AppCompatActivity {
 
         trip = getIntent().getParcelableExtra("tripData");
         setTexts();
+
+        ratingBarPopUpDialog = new Dialog(this);
+
     }
 
     private void setTexts(){
@@ -107,9 +113,10 @@ public class TicketActivity extends AppCompatActivity {
                         public void onSuccess(DocumentSnapshot documentSnapshot) {
                             Trip trip = documentSnapshot.toObject(Trip.class);
                             trip.setReadyUserNumber(trip.getReadyUserNumber() + 1);
-
+                            Toast.makeText(TicketActivity.this,"Trip is started",Toast.LENGTH_LONG).show();
                             if(trip.getFullSeatNumber() == trip.getReadyUserNumber() || trip.getDepartTime().toDate().compareTo(Calendar.getInstance().getTime()) < 0){ //if all users are ready or time is up
                                 trip.setActive(true); //set trip active
+
                                 //make users travelling now if user is enrolled this trip and ready
                                 firebaseFirestore.collection("Users")
                                         .whereArrayContains("trips",trip.getTripID())
@@ -143,11 +150,33 @@ public class TicketActivity extends AppCompatActivity {
                             firebaseFirestore.collection("Trips").document(trip.getTripID()).set(trip, SetOptions.merge()); //merge trip data
                         }
                     });
-                    //Intent intent = new Intent(TicketActivity.this,)
+                    openRatingBarPopUp();
                 }
 
             }
         });
+
+    }
+
+    private void openRatingBarPopUp(){
+        final RatingBar ratingBar;
+        Button rateButton;
+        ratingBarPopUpDialog.setContentView(R.layout.rating_bar_pop_up);
+
+        ratingBar = ratingBarPopUpDialog.findViewById(R.id.ratingBarPopUp);
+        rateButton = ratingBarPopUpDialog.findViewById(R.id.buttonRatingPopUpRate);
+
+        ratingBarPopUpDialog.show();
+
+        rateButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(TicketActivity.this,"Your rating is: " + ratingBar.getRating(),Toast.LENGTH_LONG).show();
+                ratingBarPopUpDialog.dismiss();
+            }
+        });
+
+
 
     }
 
