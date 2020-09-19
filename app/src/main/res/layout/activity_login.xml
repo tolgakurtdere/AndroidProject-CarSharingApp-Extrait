@@ -4,7 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".LoginActivity">
+    tools:context=".LoginActivity"
+    android:background="@drawable/bg">
 
     <Button
         android:id="@+id/buttonRegister"
@@ -13,10 +14,14 @@
         android:layout_marginBottom="108dp"
         android:onClick="RegisterClicked"
         android:text="REGISTER"
+        android:textColor="#000000"
+        android:textSize="16sp"
+        android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView1" />
+        app:layout_constraintTop_toBottomOf="@+id/textView1"
+        android:background="@drawable/custom_text1"/>
 
     <TextView
         android:id="@+id/textView1"
@@ -29,6 +34,8 @@
         android:gravity="center"
         android:text="If you do not have an account, let's join us!"
         android:textSize="16sp"
+        android:textColor="#FF707070"
+        android:fontFamily="@font/bahnschrift"
         app:layout_constraintBottom_toTopOf="@+id/buttonRegister"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -41,10 +48,14 @@
         android:layout_marginBottom="65dp"
         android:onClick="LoginClicked"
         android:text="LOGIN"
+        android:textColor="#000000"
+        android:textSize="16sp"
+        android:textStyle="bold"
         app:layout_constraintBottom_toTopOf="@+id/textView1"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editTextPassword" />
+        app:layout_constraintTop_toBottomOf="@+id/editTextPassword"
+        android:background="@drawable/custom_text1"/>
 
     <EditText
         android:id="@+id/editTextEmailAddress"
@@ -57,10 +68,15 @@
         android:ems="10"
         android:hint="e-mail address"
         android:inputType="textEmailAddress"
+        android:fontFamily="@font/bahnschrift"
         app:layout_constraintBottom_toTopOf="@+id/editTextPassword"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        android:drawableStart="@drawable/ic_baseline_email_24"
+        android:drawablePadding="10dp"
+        android:paddingLeft="5dp"
+        android:background="@drawable/custom_text2"/>
 
     <EditText
         android:id="@+id/editTextPassword"
@@ -72,9 +88,14 @@
         android:ems="10"
         android:hint="password"
         android:inputType="textPassword"
+        android:fontFamily="@font/bahnschrift"
         app:layout_constraintBottom_toTopOf="@+id/buttonLogin"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editTextEmailAddress" />
+        app:layout_constraintTop_toBottomOf="@+id/editTextEmailAddress"
+        android:drawableStart="@drawable/ic_baseline_lock_24"
+        android:drawablePadding="10dp"
+        android:paddingLeft="5dp"
+        android:background="@drawable/custom_text2"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

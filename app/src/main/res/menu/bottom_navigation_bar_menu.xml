@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/bottomNavigation_search"
+        android:icon="@drawable/ic_baseline_search_24"
+        android:title="Search"></item>
+    <item
+        android:id="@+id/bottomNavigation_profile"
+        android:icon="@drawable/ic_baseline_account_circle_24"
+        android:title="Profile"></item>
+    <item
+        android:id="@+id/bottomNavigation_myTrips"
+        android:icon="@drawable/ic_baseline_calendar_today_24"
+        android:title="My Trips"></item>
+    <item
+        android:id="@+id/bottomNavigation_currentTripData"
+        android:icon="@drawable/ic_baseline_location_on_24"
+        android:title="Current Trip Data"></item>
+</menu>

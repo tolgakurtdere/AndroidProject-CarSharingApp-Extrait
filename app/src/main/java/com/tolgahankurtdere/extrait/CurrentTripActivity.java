@@ -1,14 +1,17 @@
 package com.tolgahankurtdere.extrait;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.view.View;
 
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -17,6 +20,8 @@ public class CurrentTripActivity extends AppCompatActivity {
 
     FirebaseAuth firebaseAuth;
     FirebaseFirestore firebaseFirestore;
+
+    boolean isTravelingNow;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,9 +37,10 @@ public class CurrentTripActivity extends AppCompatActivity {
             @Override
             public void onSuccess(DocumentSnapshot documentSnapshot) {
                 User user = documentSnapshot.toObject(User.class);
+                isTravelingNow = user.isTravelingNow();
                 if(!user.isTravelingNow()){ //if user is not traveling now
                     AlertDialog.Builder builder = new AlertDialog.Builder(CurrentTripActivity.this);
-                    builder.setMessage("You are not currently traveling. Please try after your trip is began!");
+                    builder.setMessage("You are not currently traveling, so you won't be able to use some of the features. ");
                     builder.setNeutralButton("OK", new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
@@ -43,15 +49,49 @@ public class CurrentTripActivity extends AppCompatActivity {
                     });
                     AlertDialog alertDialog = builder.create();
                     alertDialog.show();
-                    alertDialog.setOnDismissListener(new DialogInterface.OnDismissListener() {
-                        @Override
-                        public void onDismiss(DialogInterface dialog) {
-                            finish();
-                        }
-                    });
                 }
             }
         });
+
+        /* Bottom Navigation View Start */
+        final BottomNavigationView bottomNavigationView = findViewById(R.id.bottomNavigation_view);
+        bottomNavigationView.setSelectedItemId(R.id.bottomNavigation_currentTripData);
+        bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                if(bottomNavigationView.getSelectedItemId() != item.getItemId()){ //if same item is not selected
+                    switch (item.getItemId()){
+                        case R.id.bottomNavigation_search:
+                            Intent intent1 = new Intent(getApplicationContext(),MainActivity.class);
+                            startActivity(intent1);
+                            finish();
+                            overridePendingTransition(0,0);
+                            return true;
+                        case R.id.bottomNavigation_profile:
+                            Intent intent2 = new Intent(getApplicationContext(),ProfileActivity.class);
+                            startActivity(intent2);
+                            finish();
+                            overridePendingTransition(0,0);
+                            return true;
+                        case R.id.bottomNavigation_myTrips:
+                            Intent intent3 = new Intent(getApplicationContext(),MyTripsActivity.class);
+                            startActivity(intent3);
+                            finish();
+                            overridePendingTransition(0,0);
+                            return true;
+                        case R.id.bottomNavigation_currentTripData:
+                            Intent intent4 = new Intent(getApplicationContext(),CurrentTripActivity.class);
+                            startActivity(intent4);
+                            finish();
+                            overridePendingTransition(0,0);
+                            return true;
+                    }
+                }
+
+                return false;
+            }
+        });
+        /* Bottom Navigation View End */
     }
 
     public void showLocationClicked(View view){

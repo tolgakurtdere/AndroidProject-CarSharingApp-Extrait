@@ -4,7 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".RegisterActivity">
+    tools:context=".RegisterActivity"
+    android:background="@drawable/bg">
 
     <EditText
         android:id="@+id/editTextSurname"
@@ -15,11 +16,14 @@
         android:layout_marginBottom="44dp"
         android:ems="10"
         android:hint="surname"
+        android:fontFamily="@font/bahnschrift"
         android:inputType="textPersonName"
         app:layout_constraintBottom_toTopOf="@+id/editTextEmailAddress2"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editTextName" />
+        app:layout_constraintTop_toBottomOf="@+id/editTextName"
+        android:background="@drawable/custom_text2"
+        android:paddingLeft="5dp"/>
 
     <EditText
         android:id="@+id/editTextEmailAddress2"
@@ -30,11 +34,14 @@
         android:layout_marginBottom="12dp"
         android:ems="10"
         android:hint="e-mail address"
+        android:fontFamily="@font/bahnschrift"
         android:inputType="textEmailAddress"
         app:layout_constraintBottom_toTopOf="@+id/editTextPassword2"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editTextSurname" />
+        app:layout_constraintTop_toBottomOf="@+id/editTextSurname"
+        android:background="@drawable/custom_text2"
+        android:paddingLeft="5dp"/>
 
     <Button
         android:id="@+id/buttonRegister2"
@@ -43,10 +50,12 @@
         android:layout_marginBottom="55dp"
         android:onClick="RegisterClicked"
         android:text="REGISTER"
+        android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/checkBoxDriverLicense" />
+        app:layout_constraintTop_toBottomOf="@+id/checkBoxDriverLicense"
+        android:background="@drawable/custom_text1"/>
 
     <TextView
         android:id="@+id/textViewInfo"
@@ -58,7 +67,7 @@
         android:gravity="center"
         android:text="Personal Information"
         android:textSize="24sp"
-        android:textStyle="bold"
+        android:fontFamily="@font/bahnschrift"
         app:layout_constraintBottom_toTopOf="@+id/editTextIdNo"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -73,11 +82,14 @@
         android:layout_marginBottom="13dp"
         android:ems="10"
         android:hint="name"
+        android:fontFamily="@font/bahnschrift"
         android:inputType="textPersonName"
         app:layout_constraintBottom_toTopOf="@+id/editTextSurname"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editTextIdNo" />
+        app:layout_constraintTop_toBottomOf="@+id/editTextIdNo"
+        android:background="@drawable/custom_text2"
+        android:paddingLeft="5dp"/>
 
     <EditText
         android:id="@+id/editTextPassword2"
@@ -88,11 +100,14 @@
         android:layout_marginBottom="27dp"
         android:ems="10"
         android:hint="password"
+        android:fontFamily="@font/bahnschrift"
         android:inputType="textPassword"
         app:layout_constraintBottom_toTopOf="@+id/checkBoxDriverLicense"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editTextEmailAddress2" />
+        app:layout_constraintTop_toBottomOf="@+id/editTextEmailAddress2"
+        android:background="@drawable/custom_text2"
+        android:paddingLeft="5dp"/>
 
     <CheckBox
         android:id="@+id/checkBoxDriverLicense"
@@ -100,6 +115,8 @@
         android:layout_height="0dp"
         android:layout_marginBottom="29dp"
         android:text="I have driver license"
+        android:fontFamily="@font/bahnschrift"
+        android:textSize="16sp"
         app:layout_constraintBottom_toTopOf="@+id/buttonRegister2"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -114,9 +131,12 @@
         android:layout_marginBottom="13dp"
         android:ems="10"
         android:hint="id no"
+        android:fontFamily="@font/bahnschrift"
         android:inputType="number"
         app:layout_constraintBottom_toTopOf="@+id/editTextName"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textViewInfo" />
+        app:layout_constraintTop_toBottomOf="@+id/textViewInfo"
+        android:background="@drawable/custom_text2"
+        android:paddingLeft="5dp"/>
 </androidx.constraintlayout.widget.ConstraintLayout>

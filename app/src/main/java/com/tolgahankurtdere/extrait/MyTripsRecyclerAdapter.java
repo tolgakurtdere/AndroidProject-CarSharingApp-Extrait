@@ -29,7 +29,7 @@ public class MyTripsRecyclerAdapter extends RecyclerView.Adapter<MyTripsRecycler
 
     class TripHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
 
-        TextView fromText,toText,dateText,timeText,peopleNumberText,breakNumberText,carModelText;
+        TextView fromText,toText,dateText,timeText,carModelText;
 
         public TripHolder(@NonNull View itemView) {
             super(itemView);
@@ -39,8 +39,6 @@ public class MyTripsRecyclerAdapter extends RecyclerView.Adapter<MyTripsRecycler
             toText = itemView.findViewById(R.id.myTripsRecyclerTextViewTo);
             dateText = itemView.findViewById(R.id.myTripsRecyclerTextViewDate);
             timeText = itemView.findViewById(R.id.myTripsRecyclerTextViewTime);
-            peopleNumberText = itemView.findViewById(R.id.myTripsRecyclerTextViewPeopleNumber);
-            breakNumberText = itemView.findViewById(R.id.myTripsRecyclerTextViewBreakNumber);
             carModelText = itemView.findViewById(R.id.myTripsRecyclerTextViewCarModel);
 
         }
@@ -96,8 +94,6 @@ public class MyTripsRecyclerAdapter extends RecyclerView.Adapter<MyTripsRecycler
 
         holder.fromText.setText(tripArrayList.get(position).getFrom());
         holder.toText.setText(tripArrayList.get(position).getTo());
-        holder.peopleNumberText.setText(tripArrayList.get(position).getFullSeatNumber() + "/" + tripArrayList.get(position).getPeopleNumber() + "(" + tripArrayList.get(position).getDriverNumber() + ")");
-        holder.breakNumberText.setText(String.valueOf(tripArrayList.get(position).getBreakNumber()));
         holder.carModelText.setText(tripArrayList.get(position).getCarModel());
 
     }

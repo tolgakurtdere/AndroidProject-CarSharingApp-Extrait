@@ -10,6 +10,7 @@ import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Toast;
 
@@ -17,6 +18,7 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.common.util.concurrent.Striped;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.CollectionReference;
@@ -62,6 +64,46 @@ public class MyTripsActivity extends AppCompatActivity {
         recyclerView.setAdapter(myTripsRecyclerAdapter);
 
         getMyTripsFromFirestore();
+
+        /* Bottom Navigation View Start */
+        final BottomNavigationView bottomNavigationView = findViewById(R.id.bottomNavigation_view);
+        bottomNavigationView.setSelectedItemId(R.id.bottomNavigation_myTrips);
+        bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                if(bottomNavigationView.getSelectedItemId() != item.getItemId()){ //if same item is not selected
+                    switch (item.getItemId()){
+                        case R.id.bottomNavigation_search:
+                            Intent intent1 = new Intent(getApplicationContext(),MainActivity.class);
+                            startActivity(intent1);
+                            finish();
+                            overridePendingTransition(0,0);
+                            return true;
+                        case R.id.bottomNavigation_profile:
+                            Intent intent2 = new Intent(getApplicationContext(),ProfileActivity.class);
+                            startActivity(intent2);
+                            finish();
+                            overridePendingTransition(0,0);
+                            return true;
+                        case R.id.bottomNavigation_myTrips:
+                            Intent intent3 = new Intent(getApplicationContext(),MyTripsActivity.class);
+                            startActivity(intent3);
+                            finish();
+                            overridePendingTransition(0,0);
+                            return true;
+                        case R.id.bottomNavigation_currentTripData:
+                            Intent intent4 = new Intent(getApplicationContext(),CurrentTripActivity.class);
+                            startActivity(intent4);
+                            finish();
+                            overridePendingTransition(0,0);
+                            return true;
+                    }
+                }
+
+                return false;
+            }
+        });
+        /* Bottom Navigation View End */
     }
 
     public void getMyTripsFromFirestore(){

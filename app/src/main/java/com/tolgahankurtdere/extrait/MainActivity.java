@@ -19,6 +19,7 @@ import android.widget.DatePicker;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firebase.Timestamp;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.CollectionReference;
@@ -178,6 +179,46 @@ public class MainActivity extends AppCompatActivity {
 
         recyclerView = findViewById(R.id.recyclerViewMain);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
+
+        /* Bottom Navigation View Start */
+        final BottomNavigationView bottomNavigationView = findViewById(R.id.bottomNavigation_view);
+        bottomNavigationView.setSelectedItemId(R.id.bottomNavigation_search);
+        bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                if(bottomNavigationView.getSelectedItemId() != item.getItemId()){ //if same item is not selected
+                    switch (item.getItemId()){
+                        case R.id.bottomNavigation_search:
+                            Intent intent1 = new Intent(getApplicationContext(),MainActivity.class);
+                            startActivity(intent1);
+                            finish();
+                            overridePendingTransition(0,0);
+                            return true;
+                        case R.id.bottomNavigation_profile:
+                            Intent intent2 = new Intent(getApplicationContext(),ProfileActivity.class);
+                            startActivity(intent2);
+                            finish();
+                            overridePendingTransition(0,0);
+                            return true;
+                        case R.id.bottomNavigation_myTrips:
+                            Intent intent3 = new Intent(getApplicationContext(),MyTripsActivity.class);
+                            startActivity(intent3);
+                            finish();
+                            overridePendingTransition(0,0);
+                            return true;
+                        case R.id.bottomNavigation_currentTripData:
+                            Intent intent4 = new Intent(getApplicationContext(),CurrentTripActivity.class);
+                            startActivity(intent4);
+                            finish();
+                            overridePendingTransition(0,0);
+                            return true;
+                    }
+                }
+
+                return false;
+            }
+        });
+        /* Bottom Navigation View End */
     }
 
     public void searchClicked(View view){
@@ -258,19 +299,7 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-        if(item.getItemId() == R.id.profile){
-            Intent intent = new Intent(MainActivity.this, ProfileActivity.class);
-            startActivity(intent);
-        }
-        else if(item.getItemId() == R.id.myTrips){
-            Intent intent = new Intent(MainActivity.this, MyTripsActivity.class);
-            startActivity(intent);
-        }
-        else if(item.getItemId() == R.id.currentTripData){
-            Intent intent = new Intent(MainActivity.this, CurrentTripActivity.class);
-            startActivity(intent);
-        }
-        else if(item.getItemId() == R.id.preferences){
+        if(item.getItemId() == R.id.preferences){
             Intent intent = new Intent(MainActivity.this,PreferencesActivity.class);
             startActivity(intent);
         }
